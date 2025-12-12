@@ -1,0 +1,40 @@
+// -----------------------------------------------------
+// Configuração da Conexão com o Banco de Dados (Datasource)
+// -----------------------------------------------------
+datasource db {
+  // Define o driver relacional que estamos utilizando, conforme o requisito do projeto.
+  provider = "mysql"
+  
+  // A URL de conexão segura é carregada a partir da variável de ambiente no arquivo .env.
+  // Isso mantém as credenciais do banco de dados protegidas.
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------
+// Configuração do Prisma Client
+// -----------------------------------------------------
+generator client {
+  // Define que o Prisma deve gerar o cliente JavaScript/TypeScript para a API Node.js.
+  provider = "prisma-client-js"
+}
+
+// -----------------------------------------------------
+// Definição do Modelo de Dados: Tabela 'filmes'
+// -----------------------------------------------------
+model filmes {
+  // Chave primária (PK) e auto-incremento para identificar univocamente cada filme.
+  id              Int      @id @default(autoincrement())
+  
+  // Metadados Essenciais do Filme
+  nome            String
+  sinopse         String
+  imagem          String
+  data_lancamento DateTime
+  duracao         Int
+
+  // Colunas de Auditoria (Timestamp)
+  // Registra a data de criação do filme.
+  created_at      DateTime @default(now())
+  // Atualiza automaticamente a data em cada modificação do registro.
+  updated_at      DateTime @updatedAt
+}
