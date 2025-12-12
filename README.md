@@ -1,105 +1,124 @@
-# 🎬 UniFECAF Flix API  
-API REST desenvolvida em Node.js para o catálogo de filmes da plataforma UniFECAF Flix.  
-O projeto segue arquitetura **MVC**, utiliza **Prisma ORM** para acesso ao banco MySQL e adota rigorosamente o padrão **REST**.
+🎬 UniFECAF Flix API
 
----
+API REST desenvolvida em Node.js para o catálogo de filmes da plataforma UniFECAF Flix.
+O projeto segue a arquitetura MVC, utiliza Prisma ORM para acesso ao banco MySQL e adota rigorosamente o padrão REST.
 
-## 🚀 Tecnologias Utilizadas
-- **Node.js**
-- **Express**
-- **Prisma ORM (v5.15.0)**
-- **MySQL**
-- **Dotenv**
-- **Arquitetura MVC**
-- **RESTful API**
+🚀 Tecnologias Utilizadas
 
----
+A aplicação utiliza um stack moderno e robusto:
 
-## 📁 Estrutura do Projeto
+Node.js / Express – Servidor back-end e framework para rotas
+
+Prisma ORM (v5.15.0) – Camada de acesso a dados
+
+MySQL – Banco de dados relacional
+
+Dotenv – Gerenciamento seguro de variáveis de ambiente
+
+Arquitetura MVC – Separação clara de responsabilidades
+
+RESTful API – Comunicação padronizada
+
+📁 Estrutura do Projeto
+
+A estrutura reflete o padrão MVC, facilitando manutenção, organização e escalabilidade:
 
 unifecaf-flix-api/
-├── app.js
+├── app.js               # Ponto de entrada do servidor
 ├── prisma/
-│ └── schema.prisma
+│   └── schema.prisma    # Definição do modelo de dados
 ├── src/
-│ ├── routes/
-│ │ └── filmes.routes.js
-│ ├── controllers/
-│ │ └── filme.controller.js
-│ └── models/
-│ └── filme.model.js
-├── package.json
-├── database.sql
-├── .gitignore
+│   ├── routes/
+│   │   └── filmes.routes.js     # Mapeamento de Endpoints (GET /filme)
+│   ├── controllers/
+│   │   └── filme.controller.js  # Lógica de requisição/resposta e Status HTTP
+│   └── models/
+│       └── filme.model.js       # Lógica de acesso ao DB (Prisma ORM)
+├── package.json         # Dependências e scripts
+├── database.sql         # Script para criação da tabela e seed inicial
+└── .env                 # Arquivo com a DATABASE_URL
 
----
+🔌 Endpoints da API
 
-## 🔌 Endpoints da API
+A API é acessada pelo prefixo:
 
-### ▶️ **1. Listar todos os filmes**
-**GET** `/v1/controle-filmes/filme`  
-Retorna todos os filmes cadastrados.
+/v1/controle-filmes
 
----
 
-### ▶️ **2. Buscar filme por ID**
-**GET** `/v1/controle-filmes/filme/:id`  
-Exemplo:  
-`/v1/controle-filmes/filme/1`
+Todos os endpoints retornam JSON e utilizam o método GET.
 
----
+Método	Endpoint	Descrição
+GET	/v1/controle-filmes/filme	1. Listar todos os filmes (acervo completo)
+GET	/v1/controle-filmes/filme/:id	2. Buscar filme por ID
+GET	/v1/controle-filmes/filtro/filme?nome=xxx	3. Filtrar filmes por nome ou sinopse
+Exemplos:
+GET /v1/controle-filmes/filme/1
+GET /v1/controle-filmes/filtro/filme?nome=origem
 
-### ▶️ **3. Filtrar filmes por nome ou sinopse**
-**GET** `/v1/controle-filmes/filtro/filme?nome=xxx`
+🛠️ Como Rodar o Projeto
+1. Preparação
 
-Exemplo:  
-`/v1/controle-filmes/filtro/filme?nome=origem`
+Clonar o Repositório:
 
----
+git clone https://github.com/hawkzs0x01/unifecaf-flix-api.git
+cd unifecaf-flix-api
 
-## 🛠️ Como Rodar o Projeto
 
-### 1️⃣ Clonar o repositório
-```bash
-git clone https://github.com/SEU-USUARIO/unifecaf-flix-api.git
+Instalar Dependências:
 
-2️⃣ Instalar dependências
 npm install
 
-3️⃣ Gerar o Prisma Client
+
+Configurar o Banco de Dados:
+
+Criar o banco unifecaf_flix no MySQL
+
+Executar o arquivo database.sql para criar a tabela filmes e inserir os 5 filmes iniciais
+
+2. Configuração e Inicialização
+
+Gerar o Prisma Client:
+
 npx prisma generate
 
-4️⃣ Criar o arquivo .env
+
+Criar o arquivo .env:
+
+Crie um arquivo .env na raiz com sua URL de conexão:
+
 DATABASE_URL="mysql://usuario:senha@localhost:3306/unifecaf_flix"
 
-5️⃣ Rodar a API
-npm start
+
+Rodar a API:
+
+node app.js
 
 
-Servidor no ar em:
+Servidor disponível em:
+
 👉 http://localhost:3000/v1/controle-filmes
 
 📦 Script SQL Utilizado
 
 O arquivo database.sql contém:
 
-criação da tabela filmes
+Criação da tabela filmes
 
-seed com 5 filmes
+Seed inicial com 5 filmes (ex.: O Poderoso Chefão, A Origem, etc.)
 
-limpeza e recriação da tabela
+Isso garante que o acervo esteja pronto para as consultas da API.
 
 📌 Sobre o Desenvolvimento
 
-Arquitetura 100% baseada em MVC
+Arquitetura 100% MVC
 
-Tratamento correto de erros e Status HTTP
+Tratamento correto de erros (200, 400, 404)
 
-Padrões REST aplicados de forma completa
+Padrões REST implementados corretamente
 
-Testes feitos no Postman
+Prisma ORM garantindo consultas seguras
 
-Uso do Prisma para garantir consultas seguras e legíveis
+Testes realizados via Postman
 
 👤 Autor
 
