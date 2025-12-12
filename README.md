@@ -54,21 +54,21 @@ A estrutura reflete o padrão MVC, facilitando a manutenção e a localização 
 A API é acessada pelo prefixo /v1/controle-filmes. Todos os endpoints de consulta utilizam o método GET.
 
 
-#### 1. Listar todos os filmes (Retorna o acervo completo).
+### 1. Listar todos os filmes (Retorna o acervo completo).
 
 GET
 
 /v1/controle-filmes/filme/:id
 
 
-#### 2. Buscar filme por ID (Busca um recurso específico).
+### 2. Buscar filme por ID (Busca um recurso específico).
 
 GET
 
 /v1/controle-filmes/filtro/filme?nome=xxx
 
 
-#### 3. Filtrar filmes por nome ou sinopse (Busca parcial).
+### 3. Filtrar filmes por nome ou sinopse (Busca parcial).
 
 Exemplos de Uso:
 
@@ -79,12 +79,12 @@ GET http://localhost:3000/v1/controle-filmes/filtro/filme?nome=origem
 ---
 
 
-#### Como Rodar o Projeto
+# Como Rodar o Projeto
 
 Siga os passos abaixo para colocar a API em funcionamento no seu ambiente local:
 
 
-#### 1. Preparação do Ambiente
+### 1. Preparação do Ambiente
 
 Clonar o Repositório:
 
@@ -106,7 +106,7 @@ Execute o script database.sql para criar a tabela filmes e inserir os 5 filmes i
 ---
 
 
-#### 2. Configuração e Inicialização
+### 2. Configuração e Inicialização
 
 
 **Gerar o Prisma Client:**
