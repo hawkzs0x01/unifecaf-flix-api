@@ -1,27 +1,30 @@
-🎬 UniFECAF Flix API
+# UniFECAF Flix API
 
-API REST desenvolvida em Node.js para o catálogo de filmes da plataforma UniFECAF Flix.
-O projeto segue a arquitetura MVC, utiliza Prisma ORM para acesso ao banco MySQL e adota rigorosamente o padrão REST.
+API REST desenvolvida em Node.js para o catálogo de filmes da plataforma UniFECAF Flix. O projeto segue a arquitetura MVC, utiliza Prisma ORM para acesso ao banco MySQL e adota rigorosamente o padrão REST.
 
-🚀 Tecnologias Utilizadas
+---
+
+# Tecnologias Utilizadas
 
 A aplicação utiliza um stack moderno e robusto:
 
-Node.js / Express – Servidor back-end e framework para rotas
+**Node.js / Express:** Servidor back-end e framework para rotas.
 
-Prisma ORM (v5.15.0) – Camada de acesso a dados
+**Prisma ORM (v5.15.0):** Camada de acesso a dados (resolvendo a complexidade da conexão MySQL).
 
-MySQL – Banco de dados relacional
+**MySQL:** Banco de dados relacional.
 
-Dotenv – Gerenciamento seguro de variáveis de ambiente
+**Dotenv:** Gerenciamento seguro de variáveis de ambiente.
 
-Arquitetura MVC – Separação clara de responsabilidades
+**Arquitetura MVC:** Para separação clara de responsabilidades.
 
-RESTful API – Comunicação padronizada
+**RESTful API:** Para comunicação padronizada.
 
-📁 Estrutura do Projeto
+---
 
-A estrutura reflete o padrão MVC, facilitando manutenção, organização e escalabilidade:
+# Estrutura do Projeto
+
+A estrutura reflete o padrão MVC, facilitando a manutenção e a localização das camadas.
 
 unifecaf-flix-api/
 ├── app.js               # Ponto de entrada do servidor
@@ -29,98 +32,112 @@ unifecaf-flix-api/
 │   └── schema.prisma    # Definição do modelo de dados
 ├── src/
 │   ├── routes/
-│   │   └── filmes.routes.js     # Mapeamento de Endpoints (GET /filme)
+│   │   └── filmes.routes.js   # Mapeamento de Endpoints (Routing)
 │   ├── controllers/
-│   │   └── filme.controller.js  # Lógica de requisição/resposta e Status HTTP
+│   │   └── filme.controller.js # Lógica de requisição/resposta (Controller)
 │   └── models/
-│       └── filme.model.js       # Lógica de acesso ao DB (Prisma ORM)
+│       └── filme.model.js     # Lógica de acesso ao DB (Model - Prisma ORM)
 ├── package.json         # Dependências e scripts
 ├── database.sql         # Script para criação da tabela e seed inicial
 └── .env                 # Arquivo com a DATABASE_URL
 
-🔌 Endpoints da API
+---
 
-A API é acessada pelo prefixo:
+# Endpoints da API
 
-/v1/controle-filmes
+A API é acessada pelo prefixo /v1/controle-filmes. Todos os endpoints de consulta utilizam o método GET.
 
 
-Todos os endpoints retornam JSON e utilizam o método GET.
+## 1. Listar todos os filmes (Retorna o acervo completo).
 
-Método	Endpoint	Descrição
-GET	/v1/controle-filmes/filme	1. Listar todos os filmes (acervo completo)
-GET	/v1/controle-filmes/filme/:id	2. Buscar filme por ID
-GET	/v1/controle-filmes/filtro/filme?nome=xxx	3. Filtrar filmes por nome ou sinopse
-Exemplos:
-GET /v1/controle-filmes/filme/1
-GET /v1/controle-filmes/filtro/filme?nome=origem
+GET
 
-🛠️ Como Rodar o Projeto
-1. Preparação
+/v1/controle-filmes/filme/:id
+
+## 2. Buscar filme por ID (Busca um recurso específico).
+
+GET
+
+/v1/controle-filmes/filtro/filme?nome=xxx
+
+## 3. Filtrar filmes por nome ou sinopse (Busca parcial).
+
+Exemplos de Uso:
+
+GET http://localhost:3000/v1/controle-filmes/filme/1
+GET http://localhost:3000/v1/controle-filmes/filtro/filme?nome=origem
+
+---
+
+## Como Rodar o Projeto
+
+Siga os passos abaixo para colocar a API em funcionamento no seu ambiente local:
+
+## 1. Preparação do Ambiente
 
 Clonar o Repositório:
 
-git clone https://github.com/hawkzs0x01/unifecaf-flix-api.git
+git clone [https://github.com/hawkzs0x01/unifecaf-flix-api.git](https://github.com/hawkzs0x01/unifecaf-flix-api.git)
 cd unifecaf-flix-api
 
 
-Instalar Dependências:
+**Instalar Dependências:**
 
 npm install
 
 
-Configurar o Banco de Dados:
+**Configurar o Banco de Dados:**
 
-Criar o banco unifecaf_flix no MySQL
+Crie o banco de dados unifecaf_flix no seu MySQL.
 
-Executar o arquivo database.sql para criar a tabela filmes e inserir os 5 filmes iniciais
+Execute o script database.sql para criar a tabela filmes e inserir os 5 filmes iniciais (o seed).
 
-2. Configuração e Inicialização
+---
 
-Gerar o Prisma Client:
+## 2. Configuração e Inicialização
+
+**Gerar o Prisma Client:**
 
 npx prisma generate
 
+**Criar o arquivo .env:**
 
-Criar o arquivo .env:
-
-Crie um arquivo .env na raiz com sua URL de conexão:
+Crie o arquivo .env na raiz do projeto com sua URL de conexão (ajuste usuário e senha se necessário):
 
 DATABASE_URL="mysql://usuario:senha@localhost:3306/unifecaf_flix"
 
-
-Rodar a API:
+**Rodar a API:**
 
 node app.js
 
 
-Servidor disponível em:
+**Servidor no ar em:**
+http://localhost:3000/v1/controle-filmes
 
-👉 http://localhost:3000/v1/controle-filmes
+---
 
-📦 Script SQL Utilizado
+# Script SQL Utilizado
 
-O arquivo database.sql contém:
+O arquivo database.sql é crucial. Ele contém a criação da tabela filmes e o seed inicial com 5 filmes (O Poderoso Chefão, A Origem, etc.), garantindo que o acervo esteja pronto para as consultas da API.
 
-Criação da tabela filmes
+---
 
-Seed inicial com 5 filmes (ex.: O Poderoso Chefão, A Origem, etc.)
+# Sobre o Desenvolvimento
 
-Isso garante que o acervo esteja pronto para as consultas da API.
+Arquitetura 100% baseada em MVC.
 
-📌 Sobre o Desenvolvimento
+Tratamento correto de erros e Status HTTP (200, 400, 404).
 
-Arquitetura 100% MVC
+Padrões REST aplicados de forma completa.
 
-Tratamento correto de erros (200, 400, 404)
+Uso do Prisma para garantir consultas seguras e legíveis.
 
-Padrões REST implementados corretamente
+Teste de todos os endpoints realizado via Postman.
 
-Prisma ORM garantindo consultas seguras
+---
 
-Testes realizados via Postman
-
-👤 Autor
+# Autor
 
 Guilherme Rodrigues de Oliveira
+
 Projeto desenvolvido para a disciplina Web Programming for Back-End – UniFECAF.
